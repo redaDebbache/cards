@@ -29,7 +29,7 @@ public class ControllerExceptionHandler {
     @AllArgsConstructor
     @Getter
     @Setter
-    class ErrorResponse{
+    static class ErrorResponse{
         private String message;
         private LocalDateTime timestamp;
     }
