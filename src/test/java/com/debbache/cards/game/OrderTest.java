@@ -37,6 +37,17 @@ class OrderTest {
         //Then
         assertThat(colorOrder).hasSize(10);
         assertThat(colorOrder).allMatch(value -> value >= 1 && value <= 13);
+    }
 
+    @Test
+    void shuffleCorderTest() {
+        //Given
+        var order = new Order();
+        //When
+        var colors = order.getshuffledColors();
+        //Then
+        assertThat(colors).isNotEmpty();
+        assertThat(colors).hasSize(4);
+        assertThat(colors).containsOnly(Color.CLUBS, Color.DIAMONDS, Color.HEARTS, Color.SPADES);
     }
 }

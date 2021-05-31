@@ -1,13 +1,15 @@
 package com.debbache.cards.deck;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 
-import java.util.Objects;
 import java.util.Optional;
 
 
 @Getter
+@EqualsAndHashCode
 public class Card {
     private final int value;
     private final Color color;
@@ -19,6 +21,7 @@ public class Card {
         this.rank = rank();
     }
 
+    @JsonIgnore
     public CardType getCardType(){
         return CardType.valueOf(this.value);
     }
@@ -44,22 +47,5 @@ public class Card {
     @Override
     public String toString() {
         return fullName();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Card card = (Card) o;
-        return value == card.value && color == card.color;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value, color);
     }
 }
