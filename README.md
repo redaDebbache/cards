@@ -19,3 +19,5 @@ mvn spring-boot:run
 
 ui: http://localhost:8080
 
+Documentation API: /api/swagger.yml
+
