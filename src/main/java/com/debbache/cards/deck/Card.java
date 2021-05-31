@@ -22,12 +22,12 @@ public class Card {
     }
 
     @JsonIgnore
-    public CardType getCardType(){
-        return CardType.valueOf(this.value);
+    public Optional<CardType> getCardType(){
+        return Optional.of(CardType.valueOf(this.value));
     }
 
     public String valueName(){
-        return Optional.of(getCardType())
+        return getCardType()
                 .map(CardType::getName)
                 .filter(Strings::isNotBlank)
                 .orElse(String.valueOf(this.value));
@@ -38,7 +38,7 @@ public class Card {
     }
 
     public String rank(){
-        return Optional.of(getCardType())
+        return getCardType()
                 .map(CardType::getRank)
                 .filter(Strings::isNotBlank)
                 .orElse(String.valueOf(this.value));
