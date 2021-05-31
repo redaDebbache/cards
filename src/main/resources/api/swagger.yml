@@ -1,0 +1,82 @@
+swagger: "2.0"
+info:
+  description: "Card Game API documentation"
+  version: "1.0.0"
+  title: "Card game"
+  contact:
+    email: "reda.Debbache@gmail.com"
+
+tags:
+  - name: "game"
+    description: "Init the game and get a hand"
+
+paths:
+  "/game/init":
+    get:
+      tags:
+        - "game"
+      summary: "Init a new game"
+      description: "Start anew game session, the orders are fixed for all the game session"
+      operationId: "initGame"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GameId"
+
+  "/game/{gameId}/hand":
+    get:
+      tags:
+        - "game"
+      summary: "Get a new hand"
+      description: "Get a new hand within an existing game"
+      operationId: "serveHand"
+      parameters:
+        - in: path
+          name: gameId
+          type: string
+          required: true
+          description: "The id of the game in which the hand should be served"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Hand"
+        "400":
+          description: "The given game id is invalid"
+
+
+
+definitions:
+  GameId:
+    type: string
+    description: "The unique identifier of the game."
+    example: "38281845-e57f-40c6-b683-9fa0643b5f13"
+
+  Hand:
+    type: object
+    description: "the representation of a game hand with shuuffled an sorted cards."
+    properties:
+      shuffledCards:
+        type: array
+        items:
+          $ref: '#/definitions/Card'
+      sortedCards:
+        type: array
+        items:
+          $ref: '#/definitions/Card'
+
+  Card:
+    type: object
+    description: The representation of a Card with the value, the color and the rank.
+    properties:
+      value:
+        type: "integer"
+        description: "The integer representation of the card the value goes from 1 (AS) to 13 (K)"
+        example: 1
+      color:
+        type: "string"
+        example: CLUBS
+      rank:
+        type: "string"
+        example: "A"
