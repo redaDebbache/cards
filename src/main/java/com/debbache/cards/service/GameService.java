@@ -42,4 +42,7 @@ public class GameService {
         }
     }
 
+    public int getGameCount() {
+        return games.size();
+    }
 }

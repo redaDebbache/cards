@@ -41,7 +41,6 @@ class GameRestControllerTest {
     @Test
     @DisplayName("should return 200 if the given gameId is valid")
     void serveHand200() throws Exception {
-        //Given
         mockMvc.perform(get(PathUtils.INIT_GAME_PATH)).andExpect(status().isOk())
                 .andExpect(result -> {
                     var gameId = result.getResponse().getContentAsString();
@@ -53,6 +52,16 @@ class GameRestControllerTest {
                                 assertThat(hand.getShuffledCards()).isNotEmpty();
                             });
                 });
+    }
 
+    @Test
+    @DisplayName("Should return the total game count")
+    void shouldReturnGameCounts() throws Exception {
+        mockMvc.perform(get(PathUtils.INIT_GAME_PATH)).andExpect(status().isOk())
+                .andExpect(result -> mockMvc.perform(get(PathUtils.GAME_COUNT)).andExpect(status().isOk())
+                        .andExpect(content -> {
+                            var count = content.getResponse().getContentAsString();
+                            assertThat(count).contains("data:1");
+                        }));
     }
 }

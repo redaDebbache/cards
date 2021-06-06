@@ -59,4 +59,14 @@ function getHand() {
             $("#sorted-cards").append(getCardRow(card));
         })
     });
+
+    doSSe();
 };
+
+function doSSe() {
+    const sse = new EventSource('http://localhost:8080/game/count');
+    sse.onmessage = (evt) => {
+        $("#game-count").empty();
+        $("#game-count").append(evt.data);
+    }
+}

@@ -69,5 +69,15 @@ class GameServiceTest {
         assertThat(hand.getSortedCards()).isSortedAccordingTo(colorComparator.thenComparing(valuesComparator));
     }
 
-
+    @Test
+    void gameCountTest() {
+        //Given
+        gameService.initGame();
+        gameService.initGame();
+        gameService.initGame();
+        //When
+        var gameCount = gameService.getGameCount();
+        //Then
+        assertThat(gameCount).isEqualTo(3);
+    }
 }
